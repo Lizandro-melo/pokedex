@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center">
   ATUALIZADO: Como desenvolver uma pokedex em JavaScript
 </h1>
@@ -22,3 +23,6 @@
 <h2 align="center">Tem alguma dúvida ou sugestão?</h2>
 
 <p align="center">Envie um email para <a href="mailto:oi@rogermelo.com.br">oi@rogermelo.com.br</a></p>
+=======
+# pokedex
+>>>>>>> 2878c791b23395a8d2ee80aa766361062812c6ca
