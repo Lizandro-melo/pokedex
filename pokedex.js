@@ -21,17 +21,19 @@ const getTypeColor = (type) => {
     );
 };
 
+
 const loadPokemons = async () => {
     const dataPokemons = await fetch(
         "https://pokeapi.co/api/v2/pokemon?limit=15&offset=0"
     );
     const { results: pokemons } = await dataPokemons.json();
-    createCardPokemon(pokemons);
+    createPokemon(pokemons)
+
 };
 
-const createCardPokemon = (pokemonlist) => {
-    const lista = document.querySelector('#lista')
-    const fragment = document.createDocumentFragment();
+const createPokemon = (pokemonlist) => {
+    const lista = document.querySelector('[data-js="lista-card"]');
+
     pokemonlist.forEach(async (pokemon, id) => {
         const { name, url } = pokemon;
         getType = await fetch(url);
@@ -42,11 +44,10 @@ const createCardPokemon = (pokemonlist) => {
             type: typeName,
             color: getTypeColor(typeName),
             id,
-        };
-        const li = createLi(pokemon.name, pokemon.type, pokemon.color, pokemon.id);
-        fragment.append(li);
-        lista.append(fragment);
+        }; 
     });
+    console.log(lista);
+    loadNextPokemons() 
 };
 
 const createLi = (nome, type, color, id) => {
@@ -57,7 +58,7 @@ const createLi = (nome, type, color, id) => {
     li.setAttribute("class", "card");
     li.style.setProperty("--type-color", color);
     img.setAttribute("class", "card-image");
-    img.setAttribute("src",  `assets/img/(${id}).png`);
+    img.setAttribute("src", `assets/img/(${id}).png`);
     img.setAttribute("alt", nome);
     h2.setAttribute("class", "card-title");
     h2.textContent = nome;
@@ -65,15 +66,21 @@ const createLi = (nome, type, color, id) => {
     p.textContent = type;
     li.append(img, p, h2);
     return li;
-
 };
 
 const loadNextPokemons = () => {
-    
-}
+    const lista = document.querySelector('[data-js="lista-card"]').lastElementChild 
+    console.log(lista); 
+    /*
+    const observer = new IntersectionObserver(element => {
+        if (!element.isIntersecting) {
+            console.log("feito")
+        } 
+        arr[arr. length - 1]
+    })
+    */
+};   
 
-const executePokedex = async () => {
-    loadPokemons();
-};
 
-executePokedex();
+loadPokemons();
+
